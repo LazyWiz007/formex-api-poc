@@ -1,0 +1,47 @@
+<input type="file" id="fileInput" style="display: none;" (change)="onFileSelected($event)">
+<button (click)="triggerFileInput()" class="upload-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+    <polyline points="17 8 12 3 7 8"></polyline>
+    <line x1="12" y1="3" x2="12" y2="15"></line>
+  </svg>
+  Upload a file
+</button>
+
+<div *ngIf="selectedFile">
+  <h2>Selected File:</h2>
+  <p>Name: {{ selectedFile.name }}</p>
+  <p>Size: {{ selectedFile.size }} bytes</p>
+  <p>Type: {{ selectedFile.type }}</p>
+  
+  <!-- Display image if the file is an image -->
+  <img *ngIf="isImage(selectedFile)" [src]="previewUrl" alt="Uploaded image" style="max-width: 100%; max-height: 300px;">
+  
+  <!-- Display link for non-image files -->
+  <a *ngIf="!isImage(selectedFile)" [href]="previewUrl" target="_blank">View File</a>
+
+  <button (click)="uploadFile()">Extract Data</button>
+</div>
+
+<div>
+  <h2>Server Message:</h2>
+  <p>{{ serverMessage }}</p>
+</div>
+
+<div *ngIf="extractedData">
+  <h2>Extracted Data:</h2>
+  <table *ngIf="extractedData | keyvalue as kvPairs">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pair of kvPairs">
+        <td>{{ pair.key }}</td>
+        <td>{{ pair.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
