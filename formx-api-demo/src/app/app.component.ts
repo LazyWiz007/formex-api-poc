@@ -62,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.http.post<any>('http://localhost:3000/api/extract', formData).subscribe(
         (response) => {
           this.extractedData = response.documents[0].data;
-          console.log(response);
+          // console.log(response);
         },
         (error) => {
           console.error('Error extracting data:', error);

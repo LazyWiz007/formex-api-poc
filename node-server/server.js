@@ -6,6 +6,8 @@ const request = require('request');
 const app = express();
 const port = 3000;
 
+const { fillPdf } = require('./src/pdfFiller');
+
 app.use(cors());
 
 const upload = multer({ dest: 'uploads/' });
@@ -45,6 +47,12 @@ app.post('/api/extract', upload.single('file'), (req, res) => {
     
     // Delete the uploaded file
     fs.unlinkSync(filePath);
+
+    const responseData = JSON.parse(response.body);
+
+    // Call the fillPdf function to fill form.pdf with extracted data
+    fillPdf(responseData);
+    // console.log('PDF filled successfully', JSON.parse(response.body));
 
     res.json(JSON.parse(response.body));
   });
