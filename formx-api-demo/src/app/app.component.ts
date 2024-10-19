@@ -77,4 +77,23 @@ export class AppComponent implements OnInit, OnDestroy {
       URL.revokeObjectURL(this.previewUrl);
     }
   }
+
+  downloadFilledPdf(): void {
+    this.http.get('http://localhost:3000/api/download-pdf', { responseType: 'blob' })
+      .subscribe(
+        (response: Blob) => {
+          const blob = new Blob([response], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'OCRfilledDoc.pdf';
+          link.click();
+          window.URL.revokeObjectURL(url);
+        },
+        (error) => {
+          console.error('Error downloading PDF:', error);
+          // You might want to show an error message to the user here
+        }
+      );
+  }
 }

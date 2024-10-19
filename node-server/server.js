@@ -63,6 +63,16 @@ function base64_encode(file) {
   return Buffer.from(bitmap).toString("base64");
 }
 
+app.get('/api/download-pdf', (req, res) => {
+  const filePath = './uploads/OCRfilledDoc.pdf';
+  
+  if (fs.existsSync(filePath)) {
+    res.download(filePath, 'OCRfilledDoc.pdf');
+  } else {
+    res.status(404).send('File not found');
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
