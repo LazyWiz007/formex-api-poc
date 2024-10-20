@@ -16,9 +16,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.get('/api/message', (req, res) => {
-  res.json({ message: 'Hello from the server!' });
-});
+
 
 app.post('/api/extract', upload.single('file'), (req, res) => {
   if (!req.file) {
@@ -31,8 +29,8 @@ app.post('/api/extract', upload.single('file'), (req, res) => {
     method: "POST",
     url: "https://worker.formextractorai.com/v2/extract",
     headers: {
-      "X-WORKER-TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV9vd25lcl9pZCI6IjBiMDk2NTViLTIzYTUtNGI5NS05YTM0LThmNWVlMzlhYzUyMyIsIndvcmtlcl90b2tlbl9pZCI6IjMwZmFmZjVjLTQyMTEtNDFlNy1iYzFmLTE3YWFiOWIxMjY4MyIsInVzZXJfaWQiOiIwYjA5NjU1Yi0yM2E1LTRiOTUtOWEzNC04ZjVlZTM5YWM1MjMifQ.khO6VnK2wtA5pC6hQVmevF1dCqTDE7viPmVjGmQqHM0",
-      "X-WORKER-EXTRACTOR-ID": "31578c06-5ce0-4d80-9471-94b2a4764ae9",
+      "X-WORKER-TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV9vd25lcl9pZCI6ImFhZjVmNjAxLWI0ZGItNDQzZi1hNTFiLWFkNjc2YzMxODdmYiIsIndvcmtlcl90b2tlbl9pZCI6IjlhMzFjODI2LTg1NGQtNGNlNS1iYTFlLWIwNjE5ZjI3NzU4NiIsInVzZXJfaWQiOiJhYWY1ZjYwMS1iNGRiLTQ0M2YtYTUxYi1hZDY3NmMzMTg3ZmIifQ.hiMkLXq3iMX9-6eEnbQDL6iLzuwB7teV_qGYYJ3XdHg",
+      "X-WORKER-EXTRACTOR-ID": "01e7ebaa-8fb9-404a-96ed-436cf76f4330",
       "Content-Type": "image/jpeg",
       "X-WORKER-ENCODING": "base64",
     },
